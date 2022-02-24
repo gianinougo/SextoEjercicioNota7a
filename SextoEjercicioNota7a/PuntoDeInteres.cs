@@ -16,5 +16,11 @@ abstract class PuntoDeInteres
 
     protected string Nombre { get => nombre; set => nombre = value; }
     protected string Ubicacion { get => ubicacion; set => ubicacion = value; }
+
+    public override string ToString()
+    {
+        return nombre
+            + " , " + ubicacion;
+    }
 }
 
