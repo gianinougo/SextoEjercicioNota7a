@@ -9,6 +9,8 @@ class Rio : PuntoDeInteres
 
     public Rio(string nombre, string ubicacion, int longitud) : base(nombre, ubicacion)
     {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
         this.longitud = longitud;
     }
 

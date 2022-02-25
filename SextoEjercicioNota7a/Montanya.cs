@@ -9,6 +9,8 @@ class Montanya : PuntoDeInteres
 
     public Montanya(string nombre, string ubicacion, int altitud) : base(nombre, ubicacion)
     {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
         this.altitud = altitud;
     }
 

@@ -9,6 +9,8 @@ class Ciudad : PuntoDeInteres
 
     public Ciudad(string nombre, string ubicacion, int habitantes) : base(nombre, ubicacion)
     {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
         this.habitantes = habitantes;
     }
 
