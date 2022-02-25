@@ -43,7 +43,7 @@ class Operaciones
                     //ModificarPuntosInteres();
                     break;
                 case '5':
-                    //EliminarPuntoInteres();
+                    EliminarPuntoInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
                     break;
                 case '6':
                     //OrdenarDatosAlfabeticamente();
@@ -63,10 +63,122 @@ class Operaciones
         } while (!salir);
     }
 
+    private void EliminarPuntoInteres(Ciudad[] ciudades,
+        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+    {
+        bool eliminado = false;
+        do
+        {
+            MenuPuntos();
+            switch (ElegirOpcion())
+            {
+                case '1':
+                    int eliminar = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
+
+                    if (eliminar < 0 || eliminar >= numPuntosInteres)
+                    {
+                        Console.WriteLine("Número no valido");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Desea eliminar {0}, {1}", eliminar + 1, ciudades[eliminar].ToString());
+                        //Console.WriteLine("Desea eliminar s/n");
+                        string decision = PedirDato("Eliminar? S/N").ToLower();
+
+                        if (decision == "s")
+                        {
+                            for (int i = eliminar; i < numPuntosInteres - 1; i++)
+                            {
+                                ciudades[i] = ciudades[i + 1];
+                            }
+                            Console.WriteLine("Eliminado correctamente");
+                            numPuntosInteres--;
+                            eliminado = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se ha eliminado nada");
+                        }
+
+                    }
+                    Console.WriteLine();
+                    break;
+                case '2':
+                    int eliminar2 = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
+
+                    if (eliminar2 < 0 || eliminar2 >= numPuntosInteres)
+                    {
+                        Console.WriteLine("Número no valido");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Desea eliminar {0}, {1}", eliminar2 + 1, rios[eliminar2].ToString());
+                        //Console.WriteLine("Desea eliminar s/n");
+                        string decision = PedirDato("Eliminar? S/N").ToLower();
+
+                        if (decision == "s")
+                        {
+                            for (int i = eliminar2; i < numPuntosInteres - 1; i++)
+                            {
+                                rios[i] = rios[i + 1];
+                            }
+                            Console.WriteLine("Eliminado correctamente");
+                            numPuntosInteres--;
+                            eliminado = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se ha eliminado nada");
+                        }
+
+                    }
+                    Console.WriteLine();
+                    break;
+
+                case '3':
+                    int eliminar3 = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
+
+                    if (eliminar3 < 0 || eliminar3 >= numPuntosInteres)
+                    {
+                        Console.WriteLine("Número no valido");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Desea eliminar {0}, {1}", eliminar3 + 1, montanyas[eliminar3].ToString());
+                        //Console.WriteLine("Desea eliminar s/n");
+                        string decision = PedirDato("Eliminar? S/N").ToLower();
+
+                        if (decision == "s")
+                        {
+                            for (int i = eliminar3; i < numPuntosInteres - 1; i++)
+                            {
+                                montanyas[i] = montanyas[i + 1];
+                            }
+                            Console.WriteLine("Eliminado correctamente");
+                            numPuntosInteres--;
+                            eliminado = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se ha eliminado nada");
+                        }
+
+                    }
+                    Console.WriteLine();
+                    break;
+
+                default:
+                    Console.WriteLine("Opción no valida.");
+                    break;
+            }
+
+        } while (!eliminado);
+
+    }
+
     private void BuscarPuntosInteres(Ciudad[] ciudades,
         ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
     {
-
         bool encontrado = false;
         do
         {   //ME DA NULL CREO QUE ES POR NUMPUNTOSINTERES
@@ -196,7 +308,7 @@ class Operaciones
                     break;
                 case '2':
                     string nombreRio = PedirDato("Nombre de la ciudad: ");
-                    string ubicacionRio = PedirDato("Ubicacion de la ciudad: ");
+                    string ubicacionRio = PedirDato("Ubicación de la ciudad: ");
                     int longitudRio = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
                     rios[numPuntosInteres] = new Rio(nombreRio, ubicacionRio, longitudRio);
