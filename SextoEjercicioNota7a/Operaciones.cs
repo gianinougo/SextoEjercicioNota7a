@@ -40,7 +40,7 @@ class Operaciones
                     BuscarPuntosInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
                     break;
                 case '4':
-                    //ModificarPuntosInteres();
+                    ModificarPuntosInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
                     break;
                 case '5':
                     EliminarPuntoInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
@@ -61,6 +61,41 @@ class Operaciones
             }
 
         } while (!salir);
+    }
+
+    private void ModificarPuntosInteres(Ciudad[] ciudades,
+        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+    {
+        bool modificado = false;
+
+        do
+        {
+            MenuPuntos();
+            switch (ElegirOpcion())
+            {
+                case '1':
+                    int posicion = Convert.ToInt32(PedirDato("Posicion")) - 1;
+                    if (posicion < 0 || posicion >= numPuntosInteres)
+                    {
+                        Console.WriteLine("Número no valido");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nombre: " + ciudades[posicion].nombre);
+                        //Me he quedado por aquí
+                    }
+
+
+
+                    break;
+                case '2':
+                    break;
+                case '3':
+                    break;
+                default:
+                    break;
+            }
+        } while (!modificado);
     }
 
     private void EliminarPuntoInteres(Ciudad[] ciudades,

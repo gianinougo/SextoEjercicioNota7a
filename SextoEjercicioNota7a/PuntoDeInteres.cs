@@ -5,8 +5,8 @@ using System.Text;
 
 abstract class PuntoDeInteres
 {
-    protected string nombre { get; set; }
-    protected string ubicacion { get; set; }
+    public string nombre { get; set; }
+    public string ubicacion { get; set; }
 
     public PuntoDeInteres(string nombre, string ubicacion)
     {
