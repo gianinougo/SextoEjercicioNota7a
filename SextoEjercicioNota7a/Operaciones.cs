@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Por Ugo Gianino Ejercicio con Nota
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,7 +37,7 @@ class Operaciones
                     MostrarPuntosInteres(ref ciudades, ref numPuntosInteres, ref rios, ref montanyas);
                     break;
                 case '3':
-                    //BuscarPuntosInteres();
+                    BuscarPuntosInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
                     break;
                 case '4':
                     //ModificarPuntosInteres();
@@ -60,6 +61,79 @@ class Operaciones
             }
 
         } while (!salir);
+    }
+
+    private void BuscarPuntosInteres(Ciudad[] ciudades,
+        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+    {
+
+        bool encontrado = false;
+        do
+        {   //ME DA NULL CREO QUE ES POR NUMPUNTOSINTERES
+            MenuPuntos();
+            switch (ElegirOpcion())
+            {
+                case '1':
+                    if (numPuntosInteres > 0) 
+                    {
+                        string buscar2 = PedirDato("Cidudad");
+
+                        for (int i = 0; i < numPuntosInteres; i++)
+                        {
+                            if (ciudades[i].ToString().ToLower().Contains(buscar2))
+                            {
+                                Console.WriteLine(ciudades[i]);
+                                encontrado = true;
+
+                            }
+                        }
+
+                        if (!encontrado)
+                        {
+                            Console.WriteLine("No se ha encontrado " +
+                                "la ciudad que buscabas");
+                        }
+                    }
+                    break;
+                case '2':
+                    string buscar = PedirDato("Rio");
+                    for (int i = 0; i < numPuntosInteres; i++)
+                    {
+                        if (rios[i].ToString().ToLower().Contains(buscar))
+                        {
+                            Console.WriteLine(rios[i]);
+                            encontrado = true;
+                        }
+                        if (!encontrado)
+                        {
+                            Console.WriteLine("No se ha encontrado " +
+                                "el rio que buscabas");
+                        }
+                    }
+                    break;
+                case '3':
+                    string buscar3 = PedirDato("Montanya");
+                    for (int i = 0; i < numPuntosInteres; i++)
+                    {
+                        if (montanyas[i].ToString().ToLower().Contains(buscar3))
+                        {
+                            Console.WriteLine(montanyas[i]);
+                            encontrado = true;
+                        }
+                        if (!encontrado)
+                        {
+                            Console.WriteLine("No se ha encontrado " +
+                                "la montanya que buscabas");
+                        }
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Opcion no valida");
+                    break;
+            }
+        } while (!encontrado);
+
+
     }
 
     private void MostrarPuntosInteres(ref Ciudad[] ciudades,

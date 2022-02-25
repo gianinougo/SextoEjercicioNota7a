@@ -5,8 +5,8 @@ using System.Text;
 
 abstract class PuntoDeInteres
 {
-    private string nombre;
-    private string ubicacion;
+    protected string nombre { get; set; }
+    protected string ubicacion { get; set; }
 
     public PuntoDeInteres(string nombre, string ubicacion)
     {
@@ -14,8 +14,6 @@ abstract class PuntoDeInteres
         this.ubicacion = ubicacion;
     }
 
-    protected string Nombre { get => nombre; set => nombre = value; }
-    protected string Ubicacion { get => ubicacion; set => ubicacion = value; }
 
     public override string ToString()
     {
