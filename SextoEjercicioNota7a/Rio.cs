@@ -5,19 +5,19 @@ using System.Text;
 
 class Rio : PuntoDeInteres
 {
-    protected int longitud { get; set; }
+    public int Longitud { get; set; }
 
     public Rio(string nombre, string ubicacion, int longitud) : base(nombre, ubicacion)
     {
-        this.nombre = nombre;
-        this.ubicacion = ubicacion;
-        this.longitud = longitud;
+        this.Nombre = nombre;
+        this.Ubicacion = ubicacion;
+        this.Longitud = longitud;
     }
 
 
     public override string ToString()
     {
-        return base.ToString() + " , " + longitud;
+        return base.ToString() + " , " + Longitud;
     }
 }
 

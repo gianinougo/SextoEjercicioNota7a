@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 
-abstract class PuntoDeInteres
+abstract class PuntoDeInteres : IComparable<PuntoDeInteres>
 {
-    public string nombre { get; set; }
-    public string ubicacion { get; set; }
+    public string Nombre { get; set; }
+    public string Ubicacion { get; set; }
 
     public PuntoDeInteres(string nombre, string ubicacion)
     {
-        this.nombre = nombre;
-        this.ubicacion = ubicacion;
+        this.Nombre = nombre;
+        this.Ubicacion = ubicacion;
     }
 
 
     public override string ToString()
     {
-        return nombre
-            + " , " + ubicacion;
+        return Nombre
+            + " , " + Ubicacion;
+    }
+
+    public int CompareTo(PuntoDeInteres other)
+    {
+        return this.Nombre.CompareTo(other.Nombre);
     }
 }
 

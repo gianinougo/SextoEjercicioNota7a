@@ -5,18 +5,18 @@ using System.Text;
 
 class Montanya : PuntoDeInteres
 {
-    protected int altitud { get; set; }
+    public int Altitud { get; set; }
 
     public Montanya(string nombre, string ubicacion, int altitud) : base(nombre, ubicacion)
     {
-        this.nombre = nombre;
-        this.ubicacion = ubicacion;
-        this.altitud = altitud;
+        this.Nombre = nombre;
+        this.Ubicacion = ubicacion;
+        this.Altitud = altitud;
     }
 
     public override string ToString()
     {
-        return base.ToString() + " , " + altitud;
+        return base.ToString() + " , " + Altitud;
     }
 }
 

@@ -10,7 +10,10 @@ class Operaciones
     {
         const ushort MAX = 500;
         bool salir = false;
-        int numPuntosInteres = 4;
+        //int numPuntosInteres = 0;
+        int numCiudades = 2;
+        int numRios = 2;
+        int numMontanyas = 2;
 
 
         Ciudad[] ciudades = new Ciudad[MAX];
@@ -20,7 +23,9 @@ class Operaciones
         ciudades[0] = new Ciudad("Madrid", "Espanya", 200000);
         ciudades[1] = new Ciudad("Barcelona", "Espanya", 10000);
         rios[0] = new Rio("Ebro", "Galicia", 1000);
+        rios[1] = new Rio("Ardila", "Portugal", 166);
         montanyas[0] = new Montanya("Himalaya", "Conchinchina", 1500);
+        montanyas[1] = new Montanya("Aconcagua", " América del Sur", 6962);
 
 
         do
@@ -31,22 +36,22 @@ class Operaciones
             switch (ElegirOpcion())
             {
                 case '1':
-                    AnyadirPuntoInteres(ref ciudades, ref numPuntosInteres, ref rios, ref montanyas);
+                    AnyadirPuntoInteres(ref ciudades, ref numCiudades, ref rios, ref numRios , ref montanyas ,ref numMontanyas);
                     break;
                 case '2':
-                    MostrarPuntosInteres(ref ciudades, ref numPuntosInteres, ref rios, ref montanyas);
+                    MostrarPuntosInteres(ref ciudades, ref numCiudades, ref rios, ref numRios, ref montanyas, ref numMontanyas);
                     break;
                 case '3':
-                    BuscarPuntosInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
+                    BuscarPuntosInteres(ref ciudades, ref numCiudades, ref rios, ref numRios, ref montanyas, ref numMontanyas);
                     break;
                 case '4':
-                    ModificarPuntosInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
+                    ModificarPuntosInteres(ref ciudades, ref numCiudades, ref rios, ref numRios, ref montanyas, ref numMontanyas);
                     break;
                 case '5':
-                    EliminarPuntoInteres(ciudades, ref numPuntosInteres, ref rios, ref montanyas);
+                    EliminarPuntoInteres(ref ciudades, ref numCiudades, ref rios, ref numRios, ref montanyas, ref numMontanyas);
                     break;
                 case '6':
-                    //OrdenarDatosAlfabeticamente();
+                    OrdenarDatosAlfabeticamente(ref ciudades, ref numCiudades, ref rios, ref numRios, ref montanyas, ref numMontanyas);
                     break;
                 case '7':
                     //RepasarGeograrfia();
@@ -63,8 +68,52 @@ class Operaciones
         } while (!salir);
     }
 
-    private void ModificarPuntosInteres(Ciudad[] ciudades,
-        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+    private void OrdenarDatosAlfabeticamente(ref Ciudad[] ciudades, ref int numCiudades, 
+        ref Rio[] rios, ref int numRios, ref Montanya[] montanyas, ref int numMontanyas)
+    {
+        bool ordenado = true;
+        do
+        {
+            MenuPuntos();
+            switch (ElegirOpcion())
+            {
+                case '1':
+                    Array.Sort(ciudades, 0, numCiudades);
+                    for (int i = 0; i < numCiudades; i++)
+                    {
+                        Console.WriteLine(ciudades[i]);
+                    }
+                    ordenado = true;
+                    Console.WriteLine();
+                    break;
+                case '2':
+                    Array.Sort(rios, 0, numRios);
+                    for (int i = 0; i < numRios; i++)
+                    {
+                        Console.WriteLine(rios[i]);
+                    }
+                    ordenado = true;
+                    Console.WriteLine();
+                    break;
+                case '3':
+                    Array.Sort(montanyas, 0, numMontanyas);
+                    for (int i = 0; i < numMontanyas; i++)
+                    {
+                        Console.WriteLine(montanyas[i]);
+                    }
+                    ordenado = true;
+                    Console.WriteLine();
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida");
+                    break;
+            }
+
+        } while (!ordenado);
+    }
+
+    private void ModificarPuntosInteres(ref Ciudad[] ciudades,
+        ref int numCiudades, ref Rio[] rios, ref int numRios, ref Montanya[] montanyas, ref int numMontanya)
     {
         bool modificado = false;
 
@@ -75,22 +124,66 @@ class Operaciones
             {
                 case '1':
                     int posicion = Convert.ToInt32(PedirDato("Posicion")) - 1;
-                    if (posicion < 0 || posicion >= numPuntosInteres)
+                    if (posicion < 0 || posicion >= numCiudades)
                     {
                         Console.WriteLine("Número no valido");
                     }
                     else
                     {
-                        Console.WriteLine("Nombre: " + ciudades[posicion].nombre);
-                        //Me he quedado por aquí
+                        Console.WriteLine(ciudades[posicion]);
+                        string nuevoNombre = PedirDato("Nuevo nombre");
+                        string nuevaUbicacion = PedirDato("Nueva ubicación");
+                        int nuevosHabitantes = Convert.ToInt32(PedirDato("Numero de Habitantes"));
+                        if (nuevoNombre != "")
+                        {
+                            ciudades[posicion].Nombre = nuevoNombre.Trim();
+                            ciudades[posicion].Ubicacion = nuevaUbicacion.Trim();
+                            ciudades[posicion].habitantes = nuevosHabitantes;
+                            modificado = true;
+                        }
                     }
-
-
-
                     break;
                 case '2':
+                    int posicion2 = Convert.ToInt32(PedirDato("Posicion")) - 1;
+                    if (posicion2 < 0 || posicion2 >= numRios)
+                    {
+                        Console.WriteLine("Número no valido");
+                    }
+                    else
+                    {
+                        Console.WriteLine(rios[posicion2]);
+                        string nuevoNombre = PedirDato("Nuevo nombre");
+                        string nuevaUbicacion = PedirDato("Nueva ubicación");
+                        int nuevaLongitud = Convert.ToInt32(PedirDato("Longitud"));
+                        if (nuevoNombre != "")
+                        {
+                            rios[posicion2].Nombre = nuevoNombre.Trim();
+                            rios[posicion2].Ubicacion = nuevaUbicacion.Trim();
+                            rios[posicion2].Longitud = nuevaLongitud;
+                            modificado = true;
+                        }
+                    }
                     break;
                 case '3':
+                    int posicion3 = Convert.ToInt32(PedirDato("Posicion")) - 1;
+                    if (posicion3 < 0 || posicion3 >= numMontanya)
+                    {
+                        Console.WriteLine("Número no valido");
+                    }
+                    else
+                    {
+                        Console.WriteLine(montanyas[posicion3]);
+                        string nuevoNombre = PedirDato("Nuevo nombre");
+                        string nuevaUbicacion = PedirDato("Nueva ubicación");
+                        int nuevaAltitud = Convert.ToInt32(PedirDato("Longitud"));
+                        if (nuevoNombre != "")
+                        {
+                            montanyas[posicion3].Nombre = nuevoNombre.Trim();
+                            montanyas[posicion3].Ubicacion = nuevaUbicacion.Trim();
+                            montanyas[posicion3].Altitud = nuevaAltitud;
+                            modificado = true;
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -98,8 +191,8 @@ class Operaciones
         } while (!modificado);
     }
 
-    private void EliminarPuntoInteres(Ciudad[] ciudades,
-        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+    private void EliminarPuntoInteres(ref Ciudad[] ciudades,
+        ref int numCiudades, ref Rio[] rios, ref int numRios, ref Montanya[] montanyas, ref int numMontanya)
     {
         bool eliminado = false;
         do
@@ -110,7 +203,7 @@ class Operaciones
                 case '1':
                     int eliminar = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
 
-                    if (eliminar < 0 || eliminar >= numPuntosInteres)
+                    if (eliminar < 0 || eliminar >= numCiudades)
                     {
                         Console.WriteLine("Número no valido");
                     }
@@ -122,12 +215,12 @@ class Operaciones
 
                         if (decision == "s")
                         {
-                            for (int i = eliminar; i < numPuntosInteres - 1; i++)
+                            for (int i = eliminar; i < numCiudades - 1; i++)
                             {
                                 ciudades[i] = ciudades[i + 1];
                             }
                             Console.WriteLine("Eliminado correctamente");
-                            numPuntosInteres--;
+                            numCiudades--;
                             eliminado = true;
                         }
                         else
@@ -141,7 +234,7 @@ class Operaciones
                 case '2':
                     int eliminar2 = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
 
-                    if (eliminar2 < 0 || eliminar2 >= numPuntosInteres)
+                    if (eliminar2 < 0 || eliminar2 >= numRios)
                     {
                         Console.WriteLine("Número no valido");
                     }
@@ -153,12 +246,12 @@ class Operaciones
 
                         if (decision == "s")
                         {
-                            for (int i = eliminar2; i < numPuntosInteres - 1; i++)
+                            for (int i = eliminar2; i < numRios - 1; i++)
                             {
                                 rios[i] = rios[i + 1];
                             }
                             Console.WriteLine("Eliminado correctamente");
-                            numPuntosInteres--;
+                            numRios--;
                             eliminado = true;
                         }
                         else
@@ -173,7 +266,7 @@ class Operaciones
                 case '3':
                     int eliminar3 = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
 
-                    if (eliminar3 < 0 || eliminar3 >= numPuntosInteres)
+                    if (eliminar3 < 0 || eliminar3 >= numMontanya)
                     {
                         Console.WriteLine("Número no valido");
                     }
@@ -185,12 +278,12 @@ class Operaciones
 
                         if (decision == "s")
                         {
-                            for (int i = eliminar3; i < numPuntosInteres - 1; i++)
+                            for (int i = eliminar3; i < numMontanya - 1; i++)
                             {
                                 montanyas[i] = montanyas[i + 1];
                             }
                             Console.WriteLine("Eliminado correctamente");
-                            numPuntosInteres--;
+                            numMontanya--;
                             eliminado = true;
                         }
                         else
@@ -211,8 +304,8 @@ class Operaciones
 
     }
 
-    private void BuscarPuntosInteres(Ciudad[] ciudades,
-        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+    private void BuscarPuntosInteres(ref Ciudad[] ciudades,
+        ref int numCiudades, ref Rio[] rios, ref int numRios, ref Montanya[] montanyas, ref int numMontanyas)
     {
         bool encontrado = false;
         do
@@ -221,11 +314,11 @@ class Operaciones
             switch (ElegirOpcion())
             {
                 case '1':
-                    if (numPuntosInteres > 0) 
+                    if (numCiudades > 0) 
                     {
                         string buscar2 = PedirDato("Cidudad");
 
-                        for (int i = 0; i < numPuntosInteres; i++)
+                        for (int i = 0; i < numCiudades; i++)
                         {
                             if (ciudades[i].ToString().ToLower().Contains(buscar2))
                             {
@@ -243,34 +336,40 @@ class Operaciones
                     }
                     break;
                 case '2':
-                    string buscar = PedirDato("Rio");
-                    for (int i = 0; i < numPuntosInteres; i++)
+                    if (numRios > 0)
                     {
-                        if (rios[i].ToString().ToLower().Contains(buscar))
+                        string buscar = PedirDato("Rio");
+                        for (int i = 0; i < numRios; i++)
                         {
-                            Console.WriteLine(rios[i]);
-                            encontrado = true;
-                        }
-                        if (!encontrado)
-                        {
-                            Console.WriteLine("No se ha encontrado " +
-                                "el rio que buscabas");
+                            if (rios[i].ToString().ToLower().Contains(buscar))
+                            {
+                                Console.WriteLine(rios[i]);
+                                encontrado = true;
+                            }
+                            if (!encontrado)
+                            {
+                                Console.WriteLine("No se ha encontrado " +
+                                    "el rio que buscabas");
+                            }
                         }
                     }
                     break;
                 case '3':
-                    string buscar3 = PedirDato("Montanya");
-                    for (int i = 0; i < numPuntosInteres; i++)
+                    if (numMontanyas > 0)
                     {
-                        if (montanyas[i].ToString().ToLower().Contains(buscar3))
+                        string buscar3 = PedirDato("Montanya");
+                        for (int i = 0; i < numMontanyas; i++)
                         {
-                            Console.WriteLine(montanyas[i]);
-                            encontrado = true;
-                        }
-                        if (!encontrado)
-                        {
-                            Console.WriteLine("No se ha encontrado " +
-                                "la montanya que buscabas");
+                            if (montanyas[i].ToString().ToLower().Contains(buscar3))
+                            {
+                                Console.WriteLine(montanyas[i]);
+                                encontrado = true;
+                            }
+                            if (!encontrado)
+                            {
+                                Console.WriteLine("No se ha encontrado " +
+                                    "la montanya que buscabas");
+                            }
                         }
                     }
                     break;
@@ -284,7 +383,7 @@ class Operaciones
     }
 
     private void MostrarPuntosInteres(ref Ciudad[] ciudades,
-        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+        ref int numCiudades, ref Rio[] rios, ref int numRios, ref Montanya[] montanyas, ref int numMontanyas)
     {
         bool encontrado = false;
         do
@@ -293,21 +392,21 @@ class Operaciones
             switch (ElegirOpcion())
             {
                 case '1':
-                    for (int i = 0; i < numPuntosInteres; i++)
+                    for (int i = 0; i < numCiudades; i++)
                     {
                         Console.WriteLine(ciudades[i]);
                     }
                     encontrado = true;
                     break;
                 case '2':
-                    for (int i = 0; i < numPuntosInteres; i++)
+                    for (int i = 0; i < numRios; i++)
                     {
                         Console.WriteLine(rios[i]);
                     }
                     encontrado = true;
                     break;
                 case '3':
-                    for (int i = 0; i < numPuntosInteres; i++)
+                    for (int i = 0; i < numMontanyas; i++)
                     {
                         Console.WriteLine(montanyas[i]);
                     }
@@ -322,7 +421,7 @@ class Operaciones
     }
 
     private void AnyadirPuntoInteres(ref Ciudad[] ciudades, 
-        ref int numPuntosInteres, ref Rio[] rios, ref Montanya[] montanyas)
+        ref int numCiudades, ref Rio[] rios, ref int numRios, ref Montanya[] montanyas, ref int numMontanyas)
     {
         bool insertado = false;
         do
@@ -335,8 +434,8 @@ class Operaciones
                     string ubicacionCiudad = PedirDato("Ubicacion de la ciudad: ");
                     int habitantesCiudad = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
-                    ciudades[numPuntosInteres] = new Ciudad(nombreCiudad, ubicacionCiudad, habitantesCiudad);
-                    numPuntosInteres++;
+                    ciudades[numCiudades] = new Ciudad(nombreCiudad, ubicacionCiudad, habitantesCiudad);
+                    numCiudades++;
                     insertado = true;
 
                     Console.WriteLine("Ciudad anyadida correctamente.");
@@ -346,8 +445,8 @@ class Operaciones
                     string ubicacionRio = PedirDato("Ubicación de la ciudad: ");
                     int longitudRio = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
-                    rios[numPuntosInteres] = new Rio(nombreRio, ubicacionRio, longitudRio);
-                    numPuntosInteres++;
+                    rios[numRios] = new Rio(nombreRio, ubicacionRio, longitudRio);
+                    numRios++;
 
                     Console.WriteLine("Rio anyadido correctamente.");
                     insertado = true;
@@ -357,8 +456,8 @@ class Operaciones
                     string ubicacionMontanya = PedirDato("Ubicacion de la ciudad: ");
                     int alturaMontaya = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
-                    ciudades[numPuntosInteres] = new Ciudad(nombreMontanya, ubicacionMontanya, alturaMontaya);
-                    numPuntosInteres++;
+                    ciudades[numMontanyas] = new Ciudad(nombreMontanya, ubicacionMontanya, alturaMontaya);
+                    numMontanyas++;
 
                     Console.WriteLine("Montnya anyadida correctamente.");
                     insertado = true;
