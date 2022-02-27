@@ -34,28 +34,34 @@ class Operaciones
 
         do
         {
-
             MostrarMenu();
 
             switch (ElegirOpcion())
             {
                 case '1':
-                    AnyadirPuntoInteres(ref ciudades, ref rios, ref montanyas, ref numCiudades, ref numRios, ref numMontanyas);
+                    AnyadirPuntoInteres(ref ciudades, ref rios, ref montanyas, 
+                        ref numCiudades, ref numRios, ref numMontanyas);
                     break;
                 case '2':
-                    MostrarPuntosInteres(ref ciudades, ref rios, ref montanyas, ref numCiudades, ref numRios, ref numMontanyas);
+                    MostrarPuntosInteres(ref ciudades, ref rios, ref montanyas, 
+                        ref numCiudades, ref numRios, ref numMontanyas);
                     break;
                 case '3':
-                    BuscarPuntosInteres(ref ciudades, ref rios, ref montanyas, ref numCiudades, ref numRios, ref numMontanyas);
+                    BuscarPuntosInteres(ref ciudades, ref rios, ref montanyas, 
+                        ref numCiudades, ref numRios, ref numMontanyas);
                     break;
                 case '4':
-                    ModificarPuntosInteres(ref ciudades, ref rios, ref montanyas, ref numCiudades, ref numRios, ref numMontanyas);
+                    ModificarPuntosInteres(ref ciudades, ref rios, ref montanyas, 
+                        ref numCiudades, ref numRios, ref numMontanyas);
                     break;
                 case '5':
-                    EliminarPuntoInteres(ref ciudades, ref rios, ref montanyas, ref numCiudades, ref numRios, ref numMontanyas);
+                    EliminarPuntoInteres(ref ciudades, ref rios, ref montanyas, 
+                        ref numCiudades, ref numRios, ref numMontanyas);
                     break;
                 case '6':
-                    OrdenarDatosAlfabeticamente(ref ciudades, ref rios, ref montanyas, ref numCiudades, ref numRios, ref numMontanyas);
+                    OrdenarDatosAlfabeticamente(ref ciudades, ref rios, 
+                        ref montanyas, ref numCiudades, ref numRios, 
+                        ref numMontanyas);
                     break;
                 case '7':
                     //RepasarGeograrfia();
@@ -139,7 +145,8 @@ class Operaciones
                         Console.WriteLine(ciudades[posicion]);
                         string nuevoNombre = PedirDato("Nuevo nombre");
                         string nuevaUbicacion = PedirDato("Nueva ubicación");
-                        int nuevosHabitantes = Convert.ToInt32(PedirDato("Numero de Habitantes"));
+                        int nuevosHabitantes = 
+                            Convert.ToInt32(PedirDato("Numero de Habitantes"));
                         if (nuevoNombre != "")
                         {
                             ciudades[posicion].Nombre = nuevoNombre.Trim();
@@ -208,7 +215,8 @@ class Operaciones
             switch (ElegirOpcion())
             {
                 case '1':
-                    int eliminar = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
+                    int eliminar = 
+                        Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
 
                     if (eliminar < 0 || eliminar >= numCiudades)
                     {
@@ -216,7 +224,8 @@ class Operaciones
                     }
                     else
                     {
-                        Console.WriteLine("Desea eliminar {0}, {1}", eliminar + 1, ciudades[eliminar].ToString());
+                        Console.WriteLine("Desea eliminar {0}, {1}", 
+                            eliminar + 1, ciudades[eliminar].ToString());
                         //Console.WriteLine("Desea eliminar s/n");
                         string decision = PedirDato("Eliminar? S/N").ToLower();
 
@@ -247,7 +256,8 @@ class Operaciones
                     }
                     else
                     {
-                        Console.WriteLine("Desea eliminar {0}, {1}", eliminar2 + 1, rios[eliminar2].ToString());
+                        Console.WriteLine("Desea eliminar {0}, {1}", 
+                            eliminar2 + 1, rios[eliminar2].ToString());
                         //Console.WriteLine("Desea eliminar s/n");
                         string decision = PedirDato("Eliminar? S/N").ToLower();
 
@@ -271,7 +281,8 @@ class Operaciones
                     break;
 
                 case '3':
-                    int eliminar3 = Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
+                    int eliminar3 = 
+                        Convert.ToInt32(PedirDato("Que posicion quiere eliminar?")) - 1;
 
                     if (eliminar3 < 0 || eliminar3 >= numMontanyas)
                     {
@@ -279,7 +290,8 @@ class Operaciones
                     }
                     else
                     {
-                        Console.WriteLine("Desea eliminar {0}, {1}", eliminar3 + 1, montanyas[eliminar3].ToString());
+                        Console.WriteLine("Desea eliminar {0}, {1}", 
+                            eliminar3 + 1, montanyas[eliminar3].ToString());
                         //Console.WriteLine("Desea eliminar s/n");
                         string decision = PedirDato("Eliminar? S/N").ToLower();
 
@@ -317,7 +329,7 @@ class Operaciones
     {
         bool encontrado = false;
         do
-        {   //ME DA NULL CREO QUE ES POR NUMPUNTOSINTERES
+        {   
             MenuPuntos();
             switch (ElegirOpcion())
             {
@@ -442,7 +454,8 @@ class Operaciones
                 case '1':
                     string nombreCiudad = PedirDato("Nombre de la ciudad: ");
                     string ubicacionCiudad = PedirDato("Ubicacion de la ciudad: ");
-                    int habitantesCiudad = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
+                    int habitantesCiudad = 
+                        Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
                     ciudades.Add(new Ciudad(nombreCiudad, ubicacionCiudad, habitantesCiudad));
                     numCiudades++;
@@ -453,7 +466,8 @@ class Operaciones
                 case '2':
                     string nombreRio = PedirDato("Nombre de la ciudad: ");
                     string ubicacionRio = PedirDato("Ubicación de la ciudad: ");
-                    int longitudRio = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
+                    int longitudRio = 
+                        Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
                     rios.Add(new Rio(nombreRio,ubicacionRio,longitudRio));
                     numRios++;
@@ -464,9 +478,11 @@ class Operaciones
                 case '3':
                     string nombreMontanya = PedirDato("Nombre de la ciudad: ");
                     string ubicacionMontanya = PedirDato("Ubicacion de la ciudad: ");
-                    int alturaMontaya = Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
+                    int alturaMontaya = 
+                        Convert.ToInt32(PedirDato("Numero de habitante en miles: "));
 
-                    montanyas.Add(new Montanya(nombreMontanya, ubicacionMontanya, alturaMontaya));
+                    montanyas.Add(new Montanya(nombreMontanya, 
+                        ubicacionMontanya, alturaMontaya));
                     numMontanyas++;
 
                     Console.WriteLine("Montnya anyadida correctamente.");
