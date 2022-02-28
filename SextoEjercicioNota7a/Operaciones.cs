@@ -64,7 +64,9 @@ class Operaciones
                         ref numMontanyas);
                     break;
                 case '7':
-                    //RepasarGeograrfia();
+                    RepasarGeograrfia(ref ciudades, ref rios,
+                        ref montanyas, ref numCiudades, ref numRios,
+                        ref numMontanyas);
                     break;
                 case 'S':
                     salir = true;
@@ -76,6 +78,62 @@ class Operaciones
             }
 
         } while (!salir);
+    }
+
+    private void RepasarGeograrfia(ref List<Ciudad> ciudades, ref List<Rio> rios, 
+        ref List<Montanya> montanyas, ref int numCiudades, 
+        ref int numRios, ref int numMontanyas)
+    {
+
+        Random rnd = new Random();
+        int numPuntosInteres = rnd.Next(10, 20);
+        int puntosAcertados = 0;
+
+        for (int i = 0; i < numPuntosInteres; i++)
+        {
+            int numeroPuntoInteres = rnd.Next(0, 3);
+            string nombrePuntoInteres = "";
+            string categoriaPuntoInteres = "";
+            string ubicacionPuntoInteres = "";
+
+            if (numeroPuntoInteres == 0)
+            {
+                nombrePuntoInteres = ciudades[rnd.Next(0, numCiudades)].Nombre;
+                categoriaPuntoInteres = "Ciudad";
+                ubicacionPuntoInteres = "España";
+
+            }
+            else if (numeroPuntoInteres == 1)
+            {
+                nombrePuntoInteres = rios[rnd.Next(0, numRios)].Nombre;
+                categoriaPuntoInteres = "Rio";
+                ubicacionPuntoInteres = "España";
+            }
+            else if (numeroPuntoInteres == 2)
+            {
+                nombrePuntoInteres = montanyas[rnd.Next(0, numMontanyas)].Nombre;
+                categoriaPuntoInteres = "Montanya";
+                ubicacionPuntoInteres = "España";
+            }
+
+            Console.WriteLine("¿Categoría? " + categoriaPuntoInteres);
+            Console.WriteLine("¿Ubicación? " + ubicacionPuntoInteres);
+            Console.WriteLine("¿Nombre? " + nombrePuntoInteres);
+
+            string categoriaUsuario = Console.ReadLine();
+            string ubicacionUsuario = Console.ReadLine();
+            string nombreUsuario = Console.ReadLine();
+
+            if (categoriaUsuario.ToLower() == categoriaPuntoInteres.ToLower() &&
+                ubicacionUsuario.ToLower() == ubicacionPuntoInteres.ToLower() &&
+                nombreUsuario.ToLower() == nombrePuntoInteres.ToLower())
+            {
+                puntosAcertados++;
+            }
+
+            Console.WriteLine("Puntos acertados: " + (puntosAcertados * 0.5));
+        }
+
     }
 
     private void OrdenarDatosAlfabeticamente(ref List<Ciudad> ciudades,
