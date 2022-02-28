@@ -11,6 +11,7 @@ class Operaciones
         //const ushort MAX = 500;
         bool salir = false;
         //int numPuntosInteres = 0;
+        int fila = 0;
         int numCiudades = 2;
         int numRios = 2;
         int numMontanyas = 2;
@@ -44,7 +45,7 @@ class Operaciones
                     break;
                 case '2':
                     MostrarPuntosInteres(ref ciudades, ref rios, ref montanyas, 
-                        ref numCiudades, ref numRios, ref numMontanyas);
+                        ref numCiudades, ref numRios, ref numMontanyas, ref fila);
                     break;
                 case '3':
                     BuscarPuntosInteres(ref ciudades, ref rios, ref montanyas, 
@@ -462,7 +463,7 @@ class Operaciones
 
     private void MostrarPuntosInteres(ref List<Ciudad> ciudades,
         ref List<Rio> rios, ref List<Montanya> montanyas,
-        ref int numCiudades, ref int numRios, ref int numMontanyas)
+        ref int numCiudades, ref int numRios, ref int numMontanyas, ref int fila)
     {
         bool encontrado = false;
         do
@@ -471,23 +472,47 @@ class Operaciones
             switch (ElegirOpcion())
             {
                 case '1':
+                    fila = 0;
                     for (int i = 0; i < numCiudades; i++)
                     {
                         Console.WriteLine(ciudades[i]);
+                        fila ++;
+                        if (fila == 22)
+                        {
+                            Console.WriteLine("Pulsa Enter para continuar");
+                            Console.ReadLine();
+                            fila = 0;
+                        }
                     }
                     encontrado = true;
                     break;
                 case '2':
+                    fila = 0;
                     for (int i = 0; i < numRios; i++)
                     {
                         Console.WriteLine(rios[i]);
+                        fila++;
+                        if (fila == 22)
+                        {
+                            Console.WriteLine("Pulsa Enter para continuar");
+                            Console.ReadLine();
+                            fila = 0;
+                        }
                     }
                     encontrado = true;
                     break;
                 case '3':
+                    fila = 0;
                     for (int i = 0; i < numMontanyas; i++)
                     {
                         Console.WriteLine(montanyas[i]);
+                        fila++;
+                        if (fila == 22)
+                        {
+                            Console.WriteLine("Pulsa Enter para continuar");
+                            Console.ReadLine();
+                            fila = 0;
+                        }
                     }
                     encontrado = true;
                     break;
